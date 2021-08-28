@@ -1,23 +1,23 @@
-#' Get 3' PBMC CITE-seq data published in https://www.biorxiv.org/content/10.1101/2020.10.12.335331v1
+#' Get sorted subsets of PBMC data published in https://www.nature.com/articles/ncomms14049
 #'
 #' @importFrom scanalysis cache
 #'
 #' @return
 #' @export
-get_10x_sorted_2017 = function(cache_path) {
+get_10x_sorted = function(cache_path) {
 
-  cache_path = file.path(cache_path, "10x_sorted_2017")
+  cache_path = file.path(cache_path, "10x_sorted")
   dir.create(cache_path, recursive = TRUE)
 
-  return(cache(file.path(cache_path, "10x_sorted_2017.rds"),
-               function() .process_10x_sorted_2017(cache_path)))
+  return(cache(file.path(cache_path, "10x_sorted.rds"),
+               function() .process_10x_sorted(cache_path)))
 
 }
 
 #' @importFrom BiocFileCache BiocFileCache bfcrpath
 #' @importFrom DropletUtils read10xCounts
 #' @importFrom SingleCellExperiment altExp altExp<- colData rowData logcounts logcounts<- counts SingleCellExperiment
-.process_10x_sorted_2017 = function(cache_path) {
+.process_10x_sorted = function(cache_path) {
 
   labels = c(
     "cd14_monocytes" = "CD14+ Monocytes",
@@ -63,6 +63,8 @@ get_10x_sorted_2017 = function(cache_path) {
 
   sce = SingleCellExperiment(assays = list(counts = X))
   sce$cell_type = Y
+
+  logcounts(sce) = normalize_gene(counts(sce))
 
   return(sce)
 
