@@ -1,7 +1,5 @@
 #' Get 3' PBMC CITE-seq data published in https://www.biorxiv.org/content/10.1101/2020.10.12.335331v1
 #'
-#' @importFrom scanalysis cache
-#'
 #' @return
 #' @export
 get_hao_2020 = function(cache_path) {

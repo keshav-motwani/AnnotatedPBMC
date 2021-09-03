@@ -1,15 +1,13 @@
 #' Get PBMC CITE-seq data published in https://doi.org/10.1038/s41591-020-0769-8
 #'
-#' @importFrom scanalysis cache
-#'
 #' @return
 #' @export
 get_kotliarov_2020 = function(cache_path) {
 
-  cache_path = file.path(cache_path, "kotliarov")
+  cache_path = file.path(cache_path, "kotliarov_2020")
   dir.create(cache_path)
 
-  return(cache(file.path(cache_path, "kotliarov.qs"),
+  return(cache(file.path(cache_path, "kotliarov_2020.qs"),
                function() .process_kotliarov_2020(cache_path)))
 
 }

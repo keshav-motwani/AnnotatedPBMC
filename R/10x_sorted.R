@@ -1,7 +1,5 @@
 #' Get sorted subsets of PBMC data published in https://www.nature.com/articles/ncomms14049
 #'
-#' @importFrom scanalysis cache
-#'
 #' @return
 #' @export
 get_10x_sorted = function(cache_path) {
