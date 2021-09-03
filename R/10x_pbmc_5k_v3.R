@@ -11,3 +11,32 @@ get_10x_pbmc_5k_v3 = function(cache_path) {
                function() .process_gottardo_annotated(cache_path, "10X_pbmc_5k_v3", "DCs")))
 
 }
+
+#' @importFrom BiocFileCache BiocFileCache bfcrpath
+#' @importFrom zellkonverter readH5AD
+#' @importFrom SingleCellExperiment altExp altExp<- colData logcounts logcounts<- counts SingleCellExperiment
+#' @importFrom SummarizedExperiment assays assays<-
+.process_gottardo_annotated = function(cache_path, dataset, coarse_only) {
+
+  bfc = BiocFileCache(cache_path, ask = FALSE)
+
+  data_link = paste0("https://fh-pi-gottardo-r-eco-public.s3.amazonaws.com/SingleCellDatasets/", dataset, ".h5ad")
+  data_path = bfcrpath(bfc, data_link)
+
+  data = readH5AD(data_path)
+
+  data$cell_type_l1 = as.character(data$cell_type_l1)
+  data$cell_type_l2 = as.character(data$cell_type_l2)
+  data$cell_type_l2 = ifelse(data$cell_type_l1 %in% coarse_only, data$cell_type_l1, data$cell_type_l2)
+
+  data = data[, data$cell_type_l2 != "undefined"]
+
+  data$cell_type = data$cell_type_l2
+
+  names(assays(data)) = "counts"
+
+  logcounts(data) = normalize_gene(counts(data))
+
+  return(data)
+
+}
