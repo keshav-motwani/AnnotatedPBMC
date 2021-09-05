@@ -12,7 +12,7 @@ get_10x_sorted = function(cache_path) {
 
 }
 
-#' @importFrom BiocFileCache BiocFileCache bfcrpath
+#' @importFrom BiocFileCache BiocFileCache bfcrpath bfcremove bfcrid
 #' @importFrom DropletUtils read10xCounts
 #' @importFrom SingleCellExperiment altExp altExp<- colData rowData logcounts logcounts<- counts SingleCellExperiment
 .process_10x_sorted = function(cache_path) {
@@ -63,6 +63,8 @@ get_10x_sorted = function(cache_path) {
   sce$cell_type = Y
 
   logcounts(sce) = normalize_gene(counts(sce))
+
+  bfcremove(bfc, bfcrid(bfc))
 
   return(sce)
 

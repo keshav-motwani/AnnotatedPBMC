@@ -1,5 +1,7 @@
 cache = function(file_path, fn) {
 
+  dir.create(dirname(file_path), recursive = TRUE)
+
   if (grepl(".csv", file_path)) {
     write = readr::write_csv
     read = readr::read_csv

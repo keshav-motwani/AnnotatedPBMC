@@ -7,12 +7,12 @@ get_kotliarov_2020 = function(cache_path) {
   cache_path = file.path(cache_path, "kotliarov_2020")
   dir.create(cache_path)
 
-  return(cache(file.path(cache_path, "kotliarov_2020.qs"),
+  return(cache(file.path(cache_path, "kotliarov_2020.rds"),
                function() .process_kotliarov_2020(cache_path)))
 
 }
 
-#' @importFrom BiocFileCache BiocFileCache bfcrpath
+#' @importFrom BiocFileCache BiocFileCache bfcrpath bfcremove bfcrid
 #' @importFrom SingleCellExperiment altExp altExp<- colData logcounts logcounts<- counts SingleCellExperiment
 .process_kotliarov_2020 = function(cache_path) {
 
@@ -77,6 +77,8 @@ get_kotliarov_2020 = function(cache_path) {
 
   logcounts(sce) = normalize_gene(counts(sce))
   logcounts(altExp(sce, "ADT")) = normalize_protein(counts(altExp(sce, "ADT")))
+
+  bfcremove(bfc, bfcrid(bfc))
 
   return(sce)
 

@@ -12,7 +12,7 @@ get_hao_2020 = function(cache_path) {
 
 }
 
-#' @importFrom BiocFileCache BiocFileCache bfcrpath
+#' @importFrom BiocFileCache BiocFileCache bfcrpath bfcremove bfcrid removebfc
 #' @importFrom Matrix readMM
 #' @importFrom SingleCellExperiment altExp altExp<- colData logcounts logcounts<- counts SingleCellExperiment
 .process_hao_2020 = function(cache_path) {
@@ -72,6 +72,8 @@ get_hao_2020 = function(cache_path) {
 
   logcounts(sce) = normalize_gene(counts(sce))
   logcounts(altExp(sce, "ADT")) = normalize_protein(counts(altExp(sce, "ADT")))
+
+  bfcremove(bfc, bfcrid(bfc))
 
   return(sce)
 

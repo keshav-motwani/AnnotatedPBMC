@@ -12,7 +12,7 @@ get_ding_2019 = function(cache_path) {
 
 }
 
-#' @importFrom BiocFileCache BiocFileCache bfcrpath
+#' @importFrom BiocFileCache BiocFileCache bfcrpath bfcremove bfcrid
 #' @importFrom Matrix readMM
 #' @importFrom SingleCellExperiment altExp altExp<- colData rowData logcounts logcounts<- counts SingleCellExperiment
 .process_ding_2019 = function(cache_path) {
@@ -61,6 +61,8 @@ get_ding_2019 = function(cache_path) {
   sce = sce[, sce$cell_type != "Unassigned"]
 
   logcounts(sce) = normalize_gene(counts(sce))
+
+  bfcremove(bfc, bfcrid(bfc))
 
   return(sce)
 

@@ -7,12 +7,12 @@ get_10x_pbmc_5k_v3 = function(cache_path) {
   cache_path = file.path(cache_path, "10X_pbmc_5k_v3")
   dir.create(cache_path)
 
-  return(cache(file.path(cache_path, "10X_pbmc_5k_v3.qs"),
+  return(cache(file.path(cache_path, "10X_pbmc_5k_v3.rds"),
                function() .process_gottardo_annotated(cache_path, "10X_pbmc_5k_v3", "DCs")))
 
 }
 
-#' @importFrom BiocFileCache BiocFileCache bfcrpath
+#' @importFrom BiocFileCache BiocFileCache bfcrpath bfcremove bfcrid
 #' @importFrom zellkonverter readH5AD
 #' @importFrom SingleCellExperiment altExp altExp<- colData logcounts logcounts<- counts SingleCellExperiment
 #' @importFrom SummarizedExperiment assays assays<-
@@ -36,6 +36,8 @@ get_10x_pbmc_5k_v3 = function(cache_path) {
   names(assays(data)) = "counts"
 
   logcounts(data) = normalize_gene(counts(data))
+
+  bfcremove(bfc, bfcrid(bfc))
 
   return(data)
 

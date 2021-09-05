@@ -7,7 +7,7 @@ get_10x_pbmc_10k = function(cache_path) {
   cache_path = file.path(cache_path, "10X_pbmc_10k")
   dir.create(cache_path)
 
-  return(cache(file.path(cache_path, "10X_pbmc_10k.qs"),
+  return(cache(file.path(cache_path, "10X_pbmc_10k.rds"),
                function() .process_gottardo_annotated(cache_path, "10X_pbmc_10k", "B")))
 
 }
