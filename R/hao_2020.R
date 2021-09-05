@@ -67,6 +67,8 @@ get_hao_2020 = function(cache_path) {
   sce$cell_type_3 = metadata$celltype.l3
   sce$phase = metadata$Phase
 
+  sce = sce[, data$cell_type_2 == "Doublet"]
+
   rm(gene, protein)
   gc()
 
