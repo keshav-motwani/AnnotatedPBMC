@@ -75,6 +75,8 @@ get_kotliarov_2020 = function(cache_path) {
 
   altExp(sce, "ADT") = SingleCellExperiment(assays = list(counts = adt_counts))
 
+  sce = filter_data(sce)
+
   logcounts(sce) = normalize_gene(counts(sce))
   logcounts(altExp(sce, "ADT")) = normalize_protein(counts(altExp(sce, "ADT")))
 

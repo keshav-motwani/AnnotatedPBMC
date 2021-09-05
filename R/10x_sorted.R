@@ -62,6 +62,8 @@ get_10x_sorted = function(cache_path) {
   sce = SingleCellExperiment(assays = list(counts = X))
   sce$cell_type = Y
 
+  sce = filter_data(sce)
+
   logcounts(sce) = normalize_gene(counts(sce))
 
   bfcremove(bfc, bfcrid(bfc))

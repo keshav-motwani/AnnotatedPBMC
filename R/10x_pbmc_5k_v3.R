@@ -35,6 +35,8 @@ get_10x_pbmc_5k_v3 = function(cache_path) {
 
   names(assays(data)) = "counts"
 
+  data = filter_data(data)
+
   logcounts(data) = normalize_gene(counts(data))
 
   bfcremove(bfc, bfcrid(bfc))

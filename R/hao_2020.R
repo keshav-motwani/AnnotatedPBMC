@@ -70,6 +70,8 @@ get_hao_2020 = function(cache_path) {
   rm(gene, protein)
   gc()
 
+  sce = filter_data(sce)
+
   logcounts(sce) = normalize_gene(counts(sce))
   logcounts(altExp(sce, "ADT")) = normalize_protein(counts(altExp(sce, "ADT")))
 

@@ -60,6 +60,8 @@ get_ding_2019 = function(cache_path) {
 
   sce = sce[, sce$cell_type != "Unassigned"]
 
+  sce = filter_data(sce)
+
   logcounts(sce) = normalize_gene(counts(sce))
 
   bfcremove(bfc, bfcrid(bfc))
