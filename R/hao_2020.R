@@ -19,23 +19,23 @@ get_hao_2020 = function(cache_path) {
 
   bfc = BiocFileCache(cache_path, ask = FALSE)
 
-  rna_mtx_link = "ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5008nnn/GSM5008737/suppl/GSM5008737_RNA_3P-matrix.mtx.gz"
-  rna_features_link = "ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5008nnn/GSM5008737/suppl/GSM5008737_RNA_3P-features.tsv.gz"
-  rna_barcodes_link = "ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5008nnn/GSM5008737/suppl/GSM5008737_RNA_3P-barcodes.tsv.gz"
+  rna_mtx_link = "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5008737&format=file&file=GSM5008737%5FRNA%5F3P%2Dmatrix%2Emtx%2Egz"
+  rna_features_link = "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5008737&format=file&file=GSM5008737%5FRNA%5F3P%2Dfeatures%2Etsv%2Egz"
+  rna_barcodes_link = "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5008737&format=file&file=GSM5008737%5FRNA%5F3P%2Dbarcodes%2Etsv%2Egz"
 
   rna_mtx_path = bfcrpath(bfc, rna_mtx_link)
   rna_features_path = bfcrpath(bfc, rna_features_link)
   rna_barcodes_path = bfcrpath(bfc, rna_barcodes_link)
 
-  adt_mtx_link = "ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5008nnn/GSM5008738/suppl/GSM5008738_ADT_3P-matrix.mtx.gz"
-  adt_features_link = "ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5008nnn/GSM5008738/suppl/GSM5008738_ADT_3P-features.tsv.gz"
-  adt_barcodes_link = "ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5008nnn/GSM5008738/suppl/GSM5008738_ADT_3P-barcodes.tsv.gz"
+  adt_mtx_link = "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5008738&format=file&file=GSM5008738%5FADT%5F3P%2Dmatrix%2Emtx%2Egz"
+  adt_features_link = "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5008738&format=file&file=GSM5008738%5FADT%5F3P%2Dfeatures%2Etsv%2Egz"
+  adt_barcodes_link = "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM5008738&format=file&file=GSM5008738%5FADT%5F3P%2Dbarcodes%2Etsv%2Egz"
 
   adt_mtx_path = bfcrpath(bfc, adt_mtx_link)
   adt_features_path = bfcrpath(bfc, adt_features_link)
   adt_barcodes_path = bfcrpath(bfc, adt_barcodes_link)
 
-  metadata_link = "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE164nnn/GSE164378/suppl/GSE164378_sc.meta.data_3P.csv.gz"
+  metadata_link = "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE164378&format=file&file=GSE164378%5Fsc%2Emeta%2Edata%5F3P%2Ecsv%2Egz"
 
   metadata_path = bfcrpath(bfc, metadata_link)
 
@@ -67,7 +67,7 @@ get_hao_2020 = function(cache_path) {
   sce$cell_type_3 = metadata$celltype.l3
   sce$phase = metadata$Phase
 
-  sce = sce[, data$cell_type_2 == "Doublet"]
+  sce = sce[, sce$cell_type_2 != "Doublet"]
 
   rm(gene, protein)
   gc()
