@@ -33,6 +33,8 @@ get_10x_pbmc_5k_v3 = function(cache_path) {
 
   data$cell_type = data$cell_type_l2
 
+  data$dataset = dataset
+
   names(assays(data)) = "counts"
 
   data = filter_data(data)

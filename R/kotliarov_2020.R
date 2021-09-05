@@ -65,11 +65,14 @@ get_kotliarov_2020 = function(cache_path) {
 
   sce$cell_type_1 = cell_type_1_conversion[metadata$K1]
   sce$cell_type_2 = cell_type_2_conversion[metadata$K3]
+  sce$cell_type = sce$cell_type_2
 
   sce$Barcode = colnames(sce)
   sce$response = metadata$adjmfc.time
   sce$batch = metadata$Batch
   sce$patient = metadata$sampleid
+
+  sce$dataset = paste0("kotliarov_2020_", sce$patient, sce$batch)
 
   adt_counts = attributes(old_seurat@assay$CITE)$raw.data
 

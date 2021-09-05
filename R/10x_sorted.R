@@ -62,6 +62,8 @@ get_10x_sorted = function(cache_path) {
   sce = SingleCellExperiment(assays = list(counts = X))
   sce$cell_type = Y
 
+  sce$dataset = "10x_sorted"
+
   sce = filter_data(sce)
 
   logcounts(sce) = normalize_gene(counts(sce))

@@ -67,6 +67,7 @@ get_hao_2020 = function(cache_path) {
   sce$cell_type_3 = metadata$celltype.l3
   sce$cell_type = ifelse(sce$cell_type_2 == "Treg", sce$cell_type_3, sce$cell_type_2)
   sce$phase = metadata$Phase
+  sce$dataset = paste0("hao_2020_", sce$donor, sce$time)
 
   sce = sce[, sce$cell_type_2 != "Doublet"]
 

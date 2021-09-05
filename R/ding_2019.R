@@ -58,6 +58,8 @@ get_ding_2019 = function(cache_path) {
   sce$experiment = metadata$Experiment
   sce$method = metadata$Method
 
+  sce$dataset = paste0("ding_2019_", sce$method)
+
   sce = sce[, sce$cell_type != "Unassigned"]
 
   sce = filter_data(sce)
