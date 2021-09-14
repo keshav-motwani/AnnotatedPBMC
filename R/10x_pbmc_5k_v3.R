@@ -25,13 +25,13 @@ get_10x_pbmc_5k_v3 = function(cache_path) {
 
   data = readH5AD(data_path)
 
-  data$cell_type_l1 = as.character(data$cell_type_l1)
-  data$cell_type_l2 = as.character(data$cell_type_l2)
-  data$cell_type_l2 = ifelse(data$cell_type_l1 %in% coarse_only, data$cell_type_l1, data$cell_type_l2)
+  data$cell_type_1 = as.character(data$cell_type_l1)
+  data$cell_type_2 = as.character(data$cell_type_l2)
+  data$cell_type_l1 = NULL
+  data$cell_type_l2 = NULL
+  data$cell_type_2 = ifelse(data$cell_type_1 %in% coarse_only, data$cell_type_1, data$cell_type_2)
 
-  data = data[, data$cell_type_l2 != "undefined"]
-
-  data$cell_type = data$cell_type_l2
+  data = data[, data$cell_type_2 != "undefined"]
 
   data$dataset = dataset
 
