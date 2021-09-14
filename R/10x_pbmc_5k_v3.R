@@ -25,6 +25,9 @@ get_10x_pbmc_5k_v3 = function(cache_path) {
 
   data = readH5AD(data_path)
 
+  if (dataset == "su_2020") data = data[, grepl("BP|BW|CL2|Mix", data$patient)]
+  gc()
+
   data$cell_type_1 = as.character(data$cell_type_l1)
   data$cell_type_2 = as.character(data$cell_type_l2)
   data$cell_type_l1 = NULL
@@ -33,7 +36,7 @@ get_10x_pbmc_5k_v3 = function(cache_path) {
 
   data = data[, data$cell_type_2 != "undefined"]
 
-  data$dataset = dataset
+  data$dataset = paste0(dataset, data$patient)
 
   names(assays(data)) = "counts"
 
