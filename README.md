@@ -2,7 +2,7 @@
 
 Provides processed single-cell gene expression and cell type annotations for published peripheral blood mononuclear cell (PBMC) datasets as Bioconductor SingleCellExperiment objects. 
 
-The interface is simple: functions are in the form `get_[DATASET](cache_path)` where `[DATASET]` is one of either
+The interface is simple: functions are in the form `get_DATASET(cache_path)` where `DATASET` is one of either
   - `10x_pbmc_10k`
   - `10x_pbmc_5k_v3`
   - `10x_sorted`
