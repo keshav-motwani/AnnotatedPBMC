@@ -16,4 +16,6 @@ The interface is simple: functions are in the form `get_DATASET(cache_path)` whe
 
 and `cache_path` is a user-specified file path.
 
+Interested users are encouraged to look at the source code for processing details.
+
 References and original download links are included in the function documentation. Cells are filtered to have at least 200 genes expressed and less than 10% mitochondrial reads, and are log-normalized.
