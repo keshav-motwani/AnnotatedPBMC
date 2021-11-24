@@ -1,5 +1,4 @@
 # AnnotatedPBMC
-================
 
 Provides processed single-cell gene expression and cell type annotations for published peripheral blood mononuclear cell (PBMC) datasets as Bioconductor SingleCellExperiment objects. 
 
